@@ -12,16 +12,14 @@ import com.example.zemogatest.R
 import com.example.zemogatest.core.OnItemClickListener
 import com.example.zemogatest.core.Post
 import com.example.zemogatest.databinding.FragmentPostListBinding
-import com.example.zemogatest.ui.viewmodel.MainViewModel
+import com.example.zemogatest.ui.viewmodel.SharedViewModel
 
 class PostListFragment : Fragment() {
 
     private var _binding: FragmentPostListBinding? = null
     private lateinit var postAdapter: PostAdapter
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-    private val sharedViewModel : MainViewModel by activityViewModels()
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +27,7 @@ class PostListFragment : Fragment() {
     ): View {
 
         _binding = FragmentPostListBinding.inflate(inflater, container, false)
-        sharedViewModel.testingApi()
+        sharedViewModel.getPosts()
 
         initViews()
         return binding.root
