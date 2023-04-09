@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.view.PostListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_post_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/post_item"/>
+        tools:listitem="@layout/post_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
