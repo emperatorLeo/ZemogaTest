@@ -35,23 +35,24 @@ class PostDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonDetails.setOnClickListener {
+        binding.buttonPrevious.setOnClickListener {
             findNavController().navigate(R.id.action_post_details_to_post_list)
         }
     }
 
     private fun requestComplementaryInfo() {
+        showLoader()
         sharedViewModel.getUserInfoAndComments()
     }
 
-    private fun setUpListener(){
+    private fun setUpListener() {
         sharedViewModel.complementaryInfo.observe(requireActivity()) {
             feedingView(it)
         }
     }
 
-    private fun feedingView(info: ComplementaryInfo){
-        val detailsBinding = binding.postDetails
+    private fun feedingView(info: ComplementaryInfo) {
+        val detailsBinding = _binding?.postDetails!!
 
         val post = sharedViewModel.post.value!!
         detailsBinding.tvTitle.text = post.title
@@ -67,5 +68,55 @@ class PostDetailsFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = CommentAdapter(comments)
         }
+        hideLoader()
     }
+
+    private fun hideLoader() {
+        binding.apply {
+            loader.visibility = View.INVISIBLE
+            postDetails.apply {
+                with(View.VISIBLE) {
+                    tvLabelTitle.visibility = this
+                    tvTitle.visibility = this
+                    tvLabelDescription.visibility = this
+                    tvDescription.visibility = this
+                    tvLabelAuthor.visibility = this
+                    tvLabelNameAuthor.visibility = this
+                    tvNameAuthor.visibility = this
+                    tvLabelUsernameAuthor.visibility = this
+                    tvUsernameAuthor.visibility = this
+                    tvLabelEmailAuthor.visibility = this
+                    tvEmailAuthor.visibility = this
+                    rvComments.visibility = this
+                    divider.visibility = this
+                    buttonPrevious.visibility = this
+                }
+            }
+        }
+    }
+
+    private fun showLoader() {
+        binding.apply {
+            loader.visibility = View.VISIBLE
+            postDetails.apply {
+                with(View.INVISIBLE) {
+                    tvLabelTitle.visibility = this
+                    tvTitle.visibility = this
+                    tvLabelDescription.visibility = this
+                    tvDescription.visibility = this
+                    tvLabelAuthor.visibility = this
+                    tvLabelNameAuthor.visibility = this
+                    tvNameAuthor.visibility = this
+                    tvLabelUsernameAuthor.visibility = this
+                    tvUsernameAuthor.visibility = this
+                    tvLabelEmailAuthor.visibility = this
+                    tvEmailAuthor.visibility = this
+                    rvComments.visibility = this
+                    divider.visibility = this
+                    buttonPrevious.visibility = this
+                }
+            }
+        }
+    }
+
 }

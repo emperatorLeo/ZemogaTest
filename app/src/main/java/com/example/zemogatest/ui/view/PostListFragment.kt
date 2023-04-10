@@ -35,16 +35,18 @@ class PostListFragment : Fragment() {
 
     private fun initViews() {
         sharedViewModel.postList.observe(requireActivity()) {
+
             postAdapter = PostAdapter(it, object : OnItemClickListener {
                 override fun onItemClickListener(post: Post) {
                     sharedViewModel.addingPost(post)
                     findNavController().navigate(R.id.action_post_list_to_post_details)
                 }
             })
-
+            binding.loader.visibility = View.GONE
             binding.rvPostList.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = postAdapter
+                visibility = View.VISIBLE
             }
         }
     }

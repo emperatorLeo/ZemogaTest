@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".ui.view.PostListFragment">
 
@@ -10,6 +11,17 @@
         android:id="@+id/rv_post_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/post_item" />
+        tools:listitem="@layout/post_item"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="@dimen/size_200dp"
+        android:layout_height="@dimen/size_200dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

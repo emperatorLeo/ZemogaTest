@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/tv_label_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_post"
-        android:textSize="@dimen/post_Text_size"
         android:textColor="@color/black"
+        android:textSize="@dimen/post_Text_size"
         android:textStyle="bold"
         android:typeface="monospace"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_post"
+        android:textColor="@color/design_default_color_primary_variant"
         android:textSize="@dimen/post_sub_text_size"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_title" />
 
@@ -34,6 +38,7 @@
         android:textSize="@dimen/post_Text_size"
         android:textStyle="bold"
         android:typeface="monospace"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
@@ -42,7 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/description_post"
+        android:textColor="@color/design_default_color_primary_variant"
         android:textSize="@dimen/post_sub_text_size"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_description" />
 
@@ -50,12 +57,14 @@
         android:id="@+id/tv_label_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginTop="@dimen/size_20dp"
         android:text="@string/author_post"
-        android:textSize="@dimen/post_Text_size"
         android:textColor="@color/black"
+        android:textSize="@dimen/post_Text_size"
         android:textStyle="bold"
         android:typeface="monospace"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
@@ -65,10 +74,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_10dp"
         android:text="@string/author_name_post"
+        android:textColor="@color/black"
         android:textSize="@dimen/post_Text_size"
         android:textStyle="bold"
-        android:textColor="@color/black"
         android:typeface="monospace"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_author" />
 
@@ -78,7 +88,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_5dp"
         android:text="@string/author_post"
+        android:textColor="@color/design_default_color_primary_variant"
         android:textSize="@dimen/post_sub_text_size"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/tv_label_name_author"
         app:layout_constraintStart_toEndOf="@id/tv_label_name_author"
         app:layout_constraintTop_toTopOf="@id/tv_label_name_author" />
@@ -87,12 +99,13 @@
         android:id="@+id/tv_label_username_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:layout_marginTop="@dimen/size_10dp"
         android:text="@string/author_username_post"
+        android:textColor="@color/black"
         android:textSize="@dimen/post_Text_size"
         android:textStyle="bold"
         android:typeface="monospace"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_name_author" />
 
@@ -102,7 +115,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_5dp"
         android:text="@string/author_post"
+        android:textColor="@color/design_default_color_primary_variant"
         android:textSize="@dimen/post_sub_text_size"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/tv_label_username_author"
         app:layout_constraintTop_toTopOf="@id/tv_label_username_author" />
 
@@ -112,10 +127,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_10dp"
         android:text="@string/author_email_post"
-        android:textSize="@dimen/post_Text_size"
         android:textColor="@color/black"
+        android:textSize="@dimen/post_Text_size"
         android:textStyle="bold"
         android:typeface="monospace"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_username_author" />
 
@@ -125,7 +141,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_5dp"
         android:text="@string/author_post"
+        android:textColor="@color/design_default_color_primary_variant"
         android:textSize="@dimen/post_sub_text_size"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/tv_label_email_author"
         app:layout_constraintTop_toTopOf="@id/tv_label_email_author" />
 
