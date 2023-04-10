@@ -19,7 +19,7 @@ class PostListFragment : Fragment() {
     private var _binding: FragmentPostListBinding? = null
     private lateinit var postAdapter: PostAdapter
     private val binding get() = _binding!!
-    private val sharedViewModel : SharedViewModel by activityViewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +33,7 @@ class PostListFragment : Fragment() {
         return binding.root
     }
 
-    private fun initViews(){
+    private fun initViews() {
         sharedViewModel.postList.observe(requireActivity()) {
             postAdapter = PostAdapter(it, object : OnItemClickListener {
                 override fun onItemClickListener(post: Post) {
@@ -41,16 +41,11 @@ class PostListFragment : Fragment() {
                     findNavController().navigate(R.id.action_post_list_to_post_details)
                 }
             })
+
             binding.rvPostList.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = postAdapter
             }
         }
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

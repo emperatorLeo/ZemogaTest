@@ -68,9 +68,4 @@ class PostDetailsFragment : Fragment() {
             adapter = CommentAdapter(comments)
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
