@@ -15,6 +15,6 @@
     <string name="comments_label">COMMENTS </string>
     <string name="delete_post">delete a post icon</string>
     <string name="favorite_post">favorite post</string>
-    <string name="button_delete">Delete all post</string>
+    <string name="button_delete">Delete all posts</string>
     <string name="button_reload">Reload Posts</string>
 </resources>
