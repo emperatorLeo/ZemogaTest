@@ -25,12 +25,17 @@ class PostAdapter(
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
         with(holder) {
             with(mProducts[position]) {
-                binding.postTitle.text = title
-                assignStar(binding, isFavorite)
+                binding.apply {
+                    postTitle.text = title
+                    assignStar(this, isFavorite)
+                }
                 binding.favoritePost.setOnClickListener {
                     isFavorite = !isFavorite
                     assignStar(binding, isFavorite)
-                    changePosition(isFavorite, this)
+                    changePosition(isFavorite, this, position)
+                }
+                binding.deletePost.setOnClickListener {
+                    deletePost(this, position)
                 }
             }
         }
@@ -47,15 +52,20 @@ class PostAdapter(
         }
     }
 
-    private fun changePosition(isFavorite: Boolean, post: Post) {
+    private fun changePosition(isFavorite: Boolean, post: Post, position: Int) {
         if (isFavorite) {
-            mProducts.remove(post)
+            deletePost(post, position)
             mProducts.addFirst(post)
         } else {
-            mProducts.remove(post)
+            deletePost(post, position)
             mProducts.addLast(post)
         }
         notifyDataSetChanged()
+    }
+
+    private fun deletePost(post: Post, position: Int) {
+        mProducts.remove(post)
+        notifyItemChanged(position)
     }
 
     override fun getItemCount() = mProducts.size

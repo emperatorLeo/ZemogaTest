@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="star_size">50dp</dimen>
+    <dimen name="icon_size">50dp</dimen>
     <dimen name="size_10dp">10dp</dimen>
     <dimen name="size15dp">15dp</dimen>
     <dimen name="post_Text_size">20sp</dimen>

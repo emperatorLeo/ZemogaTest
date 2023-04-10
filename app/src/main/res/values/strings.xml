@@ -13,4 +13,6 @@
     <string name="author_email_post">author email:</string>
     <string name="author_username_post">author username:</string>
     <string name="comments_label">COMMENTS </string>
+    <string name="delete_post">delete a post icon</string>
+    <string name="favorite_post">favorite post</string>
 </resources>
