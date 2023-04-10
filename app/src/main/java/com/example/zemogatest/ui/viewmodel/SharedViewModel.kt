@@ -37,6 +37,10 @@ class SharedViewModel @Inject constructor(
         this.post.value = post
     }
 
+    fun deleteAllPost(){
+        _postList.value?.removeIf { post -> !post.isFavorite }
+    }
+
     fun getUserInfoAndComments(){
         viewModelScope.launch {
             val userResponse = async { userInfo.invoke(post.value!!.userId) }

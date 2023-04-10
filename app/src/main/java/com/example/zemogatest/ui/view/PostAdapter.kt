@@ -32,10 +32,10 @@ class PostAdapter(
                 binding.favoritePost.setOnClickListener {
                     isFavorite = !isFavorite
                     assignStar(binding, isFavorite)
-                    changePosition(isFavorite, this, position)
+                    changePosition(isFavorite, this)
                 }
                 binding.deletePost.setOnClickListener {
-                    deletePost(this, position)
+                    deletePost(this)
                 }
             }
         }
@@ -52,24 +52,28 @@ class PostAdapter(
         }
     }
 
-    private fun changePosition(isFavorite: Boolean, post: Post, position: Int) {
+    private fun changePosition(isFavorite: Boolean, post: Post) {
         if (isFavorite) {
-            deletePost(post, position)
+            deletePost(post)
             mProducts.addFirst(post)
         } else {
-            deletePost(post, position)
+            deletePost(post)
             mProducts.addLast(post)
         }
         notifyDataSetChanged()
     }
 
-    private fun deletePost(post: Post, position: Int) {
+    private fun deletePost(post: Post) {
         mProducts.remove(post)
-        notifyItemChanged(position)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = mProducts.size
 
     inner class PostHolder(val binding: PostItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+    fun updateList(newList: LinkedList<Post>){
+        mProducts = newList
+    }
 
 }
