@@ -8,9 +8,10 @@ import com.example.zemogatest.R
 import com.example.zemogatest.core.OnItemClickListener
 import com.example.zemogatest.core.Post
 import com.example.zemogatest.databinding.PostItemBinding
+import java.util.LinkedList
 
 class PostAdapter(
-    private val mProducts: List<Post>,
+    private var mProducts: LinkedList<Post>,
     private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<PostAdapter.PostHolder>() {
     private lateinit var context: Context
@@ -22,7 +23,6 @@ class PostAdapter(
     }
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
-
         with(holder) {
             with(mProducts[position]) {
                 binding.postTitle.text = title
@@ -30,6 +30,7 @@ class PostAdapter(
                 binding.favoritePost.setOnClickListener {
                     isFavorite = !isFavorite
                     assignStar(binding, isFavorite)
+                    changePosition(isFavorite, this)
                 }
             }
         }
@@ -46,12 +47,19 @@ class PostAdapter(
         }
     }
 
+    private fun changePosition(isFavorite: Boolean, post: Post) {
+        if (isFavorite) {
+            mProducts.remove(post)
+            mProducts.addFirst(post)
+        } else {
+            mProducts.remove(post)
+            mProducts.addLast(post)
+        }
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount() = mProducts.size
 
     inner class PostHolder(val binding: PostItemBinding) : RecyclerView.ViewHolder(binding.root)
-
-    fun addData(products: List<Post>) {
-        mProducts.toMutableList().addAll(products)
-    }
 
 }

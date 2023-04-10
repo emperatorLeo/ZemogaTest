@@ -10,6 +10,7 @@ import com.example.zemogatest.domain.GetAllPostsUseCase
 import com.example.zemogatest.domain.GetCommentsUseCase
 import com.example.zemogatest.domain.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.LinkedList
 import javax.inject.Inject
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -20,8 +21,8 @@ class SharedViewModel @Inject constructor(
     private val userInfo: GetUserInfoUseCase,
     private val comments: GetCommentsUseCase
 ) : ViewModel() {
-    private val _postList = MutableLiveData<List<Post>>()
-    val postList: LiveData<List<Post>> = _postList
+    private val _postList = MutableLiveData<LinkedList<Post>>()
+    val postList: LiveData<LinkedList<Post>> = _postList
     val post = MutableLiveData<Post>()
     private val _complementaryInfo = MutableLiveData<ComplementaryInfo>()
     val complementaryInfo: LiveData<ComplementaryInfo> = _complementaryInfo
