@@ -3,4 +3,8 @@
     <dimen name="size_10dp">10dp</dimen>
     <dimen name="size15dp">15dp</dimen>
     <dimen name="post_Text_size">20sp</dimen>
+    <dimen name="post_sub_text_size">18sp</dimen>
+    <dimen name="size_5dp">5dp</dimen>
+    <dimen name="size_20dp">20dp</dimen>
+    <dimen name="size_1dp">1dp</dimen>
 </resources>

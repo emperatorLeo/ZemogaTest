@@ -37,6 +37,7 @@ class PostListFragment : Fragment() {
         sharedViewModel.postList.observe(requireActivity()) {
             postAdapter = PostAdapter(it, object : OnItemClickListener {
                 override fun onItemClickListener(post: Post) {
+                    sharedViewModel.addingPost(post)
                     findNavController().navigate(R.id.action_post_list_to_post_details)
                 }
             })

@@ -6,4 +6,11 @@
     <string name="previous">Previous</string>
     <string name="post_list_fragment_label">List of posts</string>
     <string name="post_details_fragment_label">Post details</string>
+    <string name="title_post">Title of the post:</string>
+    <string name="description_post">Description of the post:</string>
+    <string name="author_post">Author of this post</string>
+    <string name="author_name_post">author name:</string>
+    <string name="author_email_post">author email:</string>
+    <string name="author_username_post">author username:</string>
+    <string name="comments_label">COMMENTS </string>
 </resources>

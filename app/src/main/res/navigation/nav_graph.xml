@@ -24,5 +24,9 @@
         <action
             android:id="@+id/action_post_details_to_post_list"
             app:destination="@id/PostListFragment" />
+
+        <argument
+            android:name="postItem"
+            app:argType="com.example.zemogatest.core.Post"/>
     </fragment>
 </navigation>

@@ -16,10 +16,10 @@ class JsonHolderService @Inject constructor(private val api: JsonHolderApiClient
         }
     }
 
-    suspend fun getUserInfo(userId: Int): User? {
+    suspend fun getUserInfo(userId: Int): User {
         return withContext(Dispatchers.IO) {
             val response = api.getUser(userId)
-            response.body()
+            response.body()!!
         }
     }
 
