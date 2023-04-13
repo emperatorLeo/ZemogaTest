@@ -7,27 +7,25 @@ import java.util.LinkedList
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 class JsonHolderService @Inject constructor(private val api: JsonHolderApiClient) {
 
-    suspend fun getAllPost(): LinkedList<Post> {
+    suspend fun getAllPost(): Response<LinkedList<Post>> {
         return withContext(Dispatchers.IO) {
-            val response = api.getAllPosts()
-            response.body()!!
+             api.getAllPosts()
         }
     }
 
-    suspend fun getUserInfo(userId: Int): User {
+    suspend fun getUserInfo(userId: Int): Response<User> {
         return withContext(Dispatchers.IO) {
-            val response = api.getUser(userId)
-            response.body()!!
+             api.getUser(userId)
         }
     }
 
-    suspend fun getComments(postId: Int): List<Comment> {
+    suspend fun getComments(postId: Int): Response<List<Comment>> {
         return withContext(Dispatchers.IO){
-            val response = api.getComments(postId)
-            response.body() ?: emptyList()
+             api.getComments(postId)
         }
     }
 

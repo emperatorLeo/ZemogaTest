@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zemogatest.R
 import com.example.zemogatest.core.ComplementaryInfo
 import com.example.zemogatest.databinding.FragmentPostDetailsBinding
+import com.example.zemogatest.ui.UiState
 import com.example.zemogatest.ui.viewmodel.SharedViewModel
 
 class PostDetailsFragment : Fragment() {
@@ -41,20 +43,32 @@ class PostDetailsFragment : Fragment() {
     }
 
     private fun requestComplementaryInfo() {
-        showLoader()
         sharedViewModel.getUserInfoAndComments()
     }
 
     private fun setUpListener() {
-        sharedViewModel.complementaryInfo.observe(requireActivity()) {
-            feedingView(it)
+        sharedViewModel.uiState.observe(requireActivity()) {
+            when (it) {
+                is UiState.Error -> {
+                    onError()
+                }
+                is UiState.Loading -> {
+                    showViews(it.isVisible)
+                }
+                is UiState.Success<*> -> {
+                    if (it.data is ComplementaryInfo) {
+                        feedingView(it.data)
+                    }
+                }
+            }
+
         }
     }
 
     private fun feedingView(info: ComplementaryInfo) {
         val detailsBinding = _binding?.postDetails!!
 
-        val post = sharedViewModel.post.value!!
+        val post = sharedViewModel.post
         detailsBinding.tvTitle.text = post.title
         detailsBinding.tvDescription.text = post.post
 
@@ -66,9 +80,22 @@ class PostDetailsFragment : Fragment() {
         val comments = info.commentList
         binding.rvComments.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = CommentAdapter(comments)
+            adapter = comments?.let { CommentAdapter(it) }
         }
-        hideLoader()
+    }
+
+    private fun onError() {
+        Toast.makeText(
+            requireContext(),
+            "there were an error calling the api",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    private fun showViews(visible: Boolean) {
+        if (visible)
+            showLoader()
+        else hideLoader()
     }
 
     private fun hideLoader() {

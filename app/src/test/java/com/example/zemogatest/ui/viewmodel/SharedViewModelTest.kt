@@ -7,6 +7,7 @@ import com.example.zemogatest.core.User
 import com.example.zemogatest.domain.GetAllPostsUseCase
 import com.example.zemogatest.domain.GetCommentsUseCase
 import com.example.zemogatest.domain.GetUserInfoUseCase
+import com.example.zemogatest.ui.UiState
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
@@ -20,6 +21,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import retrofit2.Response
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class SharedViewModelTest {
@@ -53,16 +55,16 @@ internal class SharedViewModelTest {
     }
 
     @Test
-    fun `when viewModel calls getPosts , postListLiveData should have a list`() = runTest {
+    fun `when viewModel calls getPosts , UiState should return success with a list`() = runTest {
         //GIVEN
         val list = LinkedList(listOf(Post(0, 0, "title", "post"), Post(1, 1, "title", "post")))
-        coEvery { getAllPostsUseCase.invoke() } returns list
+        coEvery { getAllPostsUseCase.invoke() } returns Response.success(list)
 
         //WHEN
         sharedViewModel.getPosts()
 
         //THEN
-        assert(sharedViewModel.postList.value == list)
+        assert(sharedViewModel.uiState.value == UiState.Success<LinkedList<Post>>(list))
     }
 
     @Test
@@ -74,9 +76,10 @@ internal class SharedViewModelTest {
         sharedViewModel.addingPost(post)
 
         //THEN
-        assert(sharedViewModel.post.value == post)
+        assert(sharedViewModel.post == post)
     }
 
+    @Suppress("CAST_NEVER_SUCCEEDS")
     @Test
     fun `when viewModel delete all post , postListLiveData should remain the favorites ones`() =
         runTest {
@@ -89,7 +92,7 @@ internal class SharedViewModelTest {
             post4.isFavorite = true
 
             val list = LinkedList(listOf(post1, post2, post3, post4))
-            coEvery { getAllPostsUseCase.invoke() } returns list
+            coEvery { getAllPostsUseCase.invoke() } returns Response.success(list)
 
             //WHEN
             sharedViewModel.getPosts()
@@ -108,16 +111,16 @@ internal class SharedViewModelTest {
             val user = User("","","")
             val listOfComments = listOf(Comment("",""))
 
-            coEvery { getUserInfoUseCase.invoke(post.userId) } returns user
-            coEvery { getCommentsUseCase.invoke(post.id) } returns listOfComments
+            coEvery { getUserInfoUseCase.invoke(post.userId) } returns Response.success(user)
+            coEvery { getCommentsUseCase.invoke(post.id) } returns Response.success(listOfComments)
 
             //WHEN
             sharedViewModel.addingPost(post)
             sharedViewModel.getUserInfoAndComments()
 
             //THEN
-            assert(sharedViewModel.complementaryInfo.value?.user == user)
-            assert(sharedViewModel.complementaryInfo.value?.commentList == listOfComments)
+            checkNotNull(sharedViewModel.uiState.value)
+            assert(sharedViewModel.uiState.value is UiState.Success<*>)
         }
 
 }

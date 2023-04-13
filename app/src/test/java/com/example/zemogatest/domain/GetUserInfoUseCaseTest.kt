@@ -9,6 +9,7 @@ import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import retrofit2.Response
 
 internal class GetUserInfoUseCaseTest {
     @RelaxedMockK
@@ -26,7 +27,7 @@ internal class GetUserInfoUseCaseTest {
     fun `when invoke of getUserInfo is called it should call to getUserInfo method of the repository`() =
         runBlocking {
             //GIVEN
-            coEvery { repository.getUserInfo(0) } returns User("","","")
+            coEvery { repository.getUserInfo(0) } returns Response.success(User("","",""))
 
             //WHEN
             getUserInfoUseCase.invoke(0)
