@@ -58,7 +58,7 @@ class SharedViewModel @Inject constructor(
             val user = userResponse.await()
             val listOfComments = listOfCommentsResponse.await()
 
-            //if (user.isSuccessful && listOfComments.isSuccessful) {
+            if (user.isSuccessful && listOfComments.isSuccessful) {
                 _uiState.value = Loading(false)
                 _uiState.value = Success(
                     ComplementaryInfo(
@@ -66,7 +66,7 @@ class SharedViewModel @Inject constructor(
                         commentList = listOfComments.body()
                     )
                 )
-           // }
+            }
         }
     }
 }
