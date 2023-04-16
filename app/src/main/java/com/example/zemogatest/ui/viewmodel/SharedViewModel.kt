@@ -32,7 +32,7 @@ class SharedViewModel @Inject constructor(
     fun getPosts() {
         viewModelScope.launch {
             _uiState.value = Loading(true)
-            val postResponse = posts.invoke()
+            val postResponse = posts()
             if (postResponse.isSuccessful) {
                 _uiState.value = Loading(false)
                 _postList.value = postResponse.body()
@@ -52,8 +52,8 @@ class SharedViewModel @Inject constructor(
     fun getUserInfoAndComments(){
         _uiState.value = Loading(true)
         viewModelScope.launch {
-            val userResponse = async { userInfo.invoke(post.userId) }
-            val listOfCommentsResponse = async { comments.invoke(post.id) }
+            val userResponse = async { userInfo(post.userId) }
+            val listOfCommentsResponse = async { comments(post.id) }
 
             val user = userResponse.await()
             val listOfComments = listOfCommentsResponse.await()
